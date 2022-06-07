@@ -3,7 +3,7 @@ document.querySelector('#retrieveBtn').addEventListener('click', retrieveStock);
 
 async function retrieveStock(){
 	const stock = document.querySelector("#stockName").value;  
-	const res = await fetch('/api?stock=' + stock);
+	const res = await fetch('/stock/' + stock);
 	const data = await res.json();
 	if( !data.err){
 		document.querySelector("#name").textContent = "Name: " + data.name;
