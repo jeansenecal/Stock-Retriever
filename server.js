@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const PORT = 8000;
-const fetch = require('node-fetch');
+const axios = require('axios');
 
 app.use(cors());
 
@@ -18,16 +18,28 @@ app.get('/js/main.js', (req, res) => {
 app.get('/stock/:stockName', (req, res) => {
     const stockName = req.params.stockName.toLowerCase()
     if(stockName !== ""){
-        const options = {
-            method: 'GET',
+        const axiosOptions ={
             params: {modules: 'defaultKeyStatistics,assetProfile'},
             headers: {
               'X-API-KEY': '0KhpZ6tcGv57qyvZ1G8IEaPDcIIVAAMW65yo2enN'
             }
-          };
+        };
         const url = 'https://yfapi.net/v6/finance/quote?region=US&lang=eng&symbols=' + stockName;
-       fetch(url, options)
-            .then(result => result.json()) // parse response as JSON
+        axios.get(url, axiosOptions)
+            .then(response => {
+                const objToJson = {
+                    price: response.data.quoteResponse.result[0].regularMarketPrice,
+                    exchange: response.data.quoteResponse.result[0].fullExchangeName,
+                    name: response.data.quoteResponse.result[0].longName
+                }
+                return res.json(objToJson);
+            })
+            .catch(error => {
+                res.json({error: "Stock not found"});
+        });
+            
+       /*fetch(url, options)
+            .then(result => console.log(result)) // parse response as JSON
             .then(data => {
                 const objToJson = {
                     price: data.quoteResponse.result[0].regularMarketPrice,
@@ -38,7 +50,7 @@ app.get('/stock/:stockName', (req, res) => {
             })
             .catch(err => {
                 res.json({err: "Stock not found"});
-            });
+            });*/
     }else{
         res.json({err: "No stock entered"});
     }  
