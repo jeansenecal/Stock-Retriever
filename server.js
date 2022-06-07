@@ -1,8 +1,8 @@
-const express = require('express')
-const app = express()
-const cors = require('cors')
-const PORT = 8000
-const figlet = require('figlet')
+const express = require('express');
+const app = express();
+const cors = require('cors');
+const PORT = 8000;
+const fetch = require('node-fetch');
 
 app.use(cors());
 
@@ -26,7 +26,7 @@ app.get('/stock/:stockName', (req, res) => {
             }
           };
         const url = 'https://yfapi.net/v6/finance/quote?region=US&lang=eng&symbols=' + stockName;
-        fetch(url, options)
+       fetch(url, options)
             .then(result => result.json()) // parse response as JSON
             .then(data => {
                 const objToJson = {
