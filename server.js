@@ -5,11 +5,23 @@ const PORT = 8000;
 const axios = require('axios');
 const puppeteer = require('puppeteer');
 const schedule = require('node-schedule');
+const MongoClient = require('mongodb').MongoClient
+require('dotenv').config()
 
 app.use(cors());
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+let db,
+    dbConnectionStr = process.env.DB_STRING,
+    dbName = 'stocks';
+
+MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
+    .then(client => {
+        console.log(`Connected to ${dbName} Database`);
+        db = client.db(dbName);
+    });
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
@@ -29,7 +41,7 @@ app.get('/stock/:stockName', (req, res) => {
         const axiosOptions ={
             params: {modules: 'defaultKeyStatistics,assetProfile'},
             headers: {
-              'X-API-KEY': '0KhpZ6tcGv57qyvZ1G8IEaPDcIIVAAMW65yo2enN'
+              'X-API-KEY': process.env.YF_API_KEY
             }
         };
         const url = 'https://yfapi.net/v6/finance/quote?region=US&lang=eng&symbols=' + stockName;
@@ -56,6 +68,7 @@ app.listen(process.env.PORT || PORT, () => {
 
 async function scrapeDayminer(){
     //Get hyped reddit stock list
+    console.log("Starting scraping process");
     const browser = await puppeteer.launch({});
     const page = await browser.newPage();
     await page.goto('https://dayminer.herokuapp.com/');
@@ -82,20 +95,40 @@ async function scrapeDayminer(){
     let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
     let year = date_ob.getFullYear();
     let hours = date_ob.getHours();
-    const dateOfRetrieval = year + "-" + month + "-" + date + " " + hours;
-
-    stockScoreDateArray = stockScoreDateArray.filter( e => e.score > 1000).map( (e,i) => {
-        const price = getStockPrice(e.symbol);
-        const stock = new Stock(e.symbol, e.score, dateOfRetrieval, price);
-        return stock;
-    });
-    console.table(stockScoreDateArray);
+    let tod = "";
+    if(hours > 12){
+        tod = "pm";
+    }else{
+        tod = "am";
+    }
+    const dateOfRetrieval = year + "-" + month + "-" + date + " " + tod;
+    
+    stockScoreDateArray = stockScoreDateArray.filter( e => e.score > 10).map( e => new Stock(e.symbol, e.score, 0, dateOfRetrieval));
+    
+    const intervalId = setInterval( async () => {
+        if(stockScoreDateArray.length > 0){
+            let stock = stockScoreDateArray.shift();
+            stock.price = await getStockPrice(stock.symbol);
+            if(stock.score > 200){
+                db.collection('stockScoreGreater200').insertOne(stock)
+                    .catch(error => console.error(error))
+            }else if (stock.score > 50){
+                db.collection('stockScoreGreater50').insertOne(stock)
+                    .catch(error => console.error(error))
+            }else{
+                db.collection('stockScoreGreater10').insertOne(stock)
+                    .catch(error => console.error(error))
+            }
+        }else{
+            clearInterval(intervalId);
+            console.log("Finished inserting stocks");
+        }
+    },10000, stockScoreDateArray);
     
 }
 async function getStockPrice(symbol){
-    const url = 'https://api.twelvedata.com/price?symbol=' + symbol + '&apikey=60a9ceb5ddc3441db6e910714832ead0';
+    const url = 'https://api.twelvedata.com/price?symbol=' + symbol + '&apikey=' + process.env.TWELVE_DATA_API_KEY;
     let res = await axios.get(url);
-    console.log(res.data.price);
-    await sleep(10000);
-    return res.data.price;
+    price = res.data.price;
+    return price;
 }
