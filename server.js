@@ -36,7 +36,6 @@ class Stock {
 }
 app.get('/stock/:stockName', (req, res) => {
     const stockName = req.params.stockName.toLowerCase()
-    scrapeDayminer();
     if(stockName !== ""){
         const axiosOptions ={
             params: {modules: 'defaultKeyStatistics,assetProfile'},
@@ -65,6 +64,8 @@ app.get('/stock/:stockName', (req, res) => {
 app.listen(process.env.PORT || PORT, () => {
     console.log(`Server running on port ${PORT}`)
 });
+
+const job = schedule.scheduleJob('0 30 9,15 ? * MON,TUE,WED,THU,FRI *', scrapeDayminer());
 
 async function scrapeDayminer(){
     //Get hyped reddit stock list
@@ -103,7 +104,8 @@ async function scrapeDayminer(){
     }
     const dateOfRetrieval = year + "-" + month + "-" + date + " " + tod;
     
-    stockScoreDateArray = stockScoreDateArray.filter( e => e.score > 10).map( e => new Stock(e.symbol, e.score, 0, dateOfRetrieval));
+    stockScoreDateArray = stockScoreDateArray.filter( e => e.score > 10)
+        .map( e => new Stock(e.symbol, e.score, 0, dateOfRetrieval));
     
     const intervalId = setInterval( async () => {
         if(stockScoreDateArray.length > 0){
@@ -111,13 +113,13 @@ async function scrapeDayminer(){
             stock.price = await getStockPrice(stock.symbol);
             if(stock.score > 200){
                 db.collection('stockScoreGreater200').insertOne(stock)
-                    .catch(error => console.error(error))
+                    .catch(error => console.error(error));
             }else if (stock.score > 50){
                 db.collection('stockScoreGreater50').insertOne(stock)
-                    .catch(error => console.error(error))
+                    .catch(error => console.error(error));
             }else{
                 db.collection('stockScoreGreater10').insertOne(stock)
-                    .catch(error => console.error(error))
+                    .catch(error => console.error(error));
             }
         }else{
             clearInterval(intervalId);
