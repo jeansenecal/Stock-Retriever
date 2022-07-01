@@ -65,7 +65,7 @@ app.listen(process.env.PORT || PORT, () => {
     console.log(`Server running on port ${PORT}`)
 });
 
-const job = schedule.scheduleJob('0 30 9,15 ? * MON,TUE,WED,THU,FRI *', scrapeDayminer());
+const job = schedule.scheduleJob('0 30 9,15 ? * MON,TUE,WED,THU,FRI *', scrapeDayminer);
 
 async function scrapeDayminer(){
     //Get hyped reddit stock list
