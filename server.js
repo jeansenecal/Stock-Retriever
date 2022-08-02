@@ -12,6 +12,7 @@ app.use(cors());
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.set('view engine', 'ejs');
 
 let db,
     dbConnectionStr = process.env.DB_STRING,
@@ -23,8 +24,9 @@ MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
         db = client.db(dbName);
     });
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+app.get('/', async (req, res) => {
+    const boughtStocks = await db.collection('boughtStocks').find().toArray();
+    res.render('index.ejs', {boughtStocks: boughtStocks});
 });
 class Stock {
     constructor(symbol, score, price, date){
@@ -34,6 +36,38 @@ class Stock {
         this.date = date;
     }
 }
+
+app.post('/addboughtStock', (request, response) => {
+    db.collection('boughtStocks').insertOne({sticker: request.body.sticker, price: request.body.price})
+    .then(result => {
+        response.redirect('/');
+    })
+    .catch(error => console.error(error));
+});
+
+app.put('/updateboughtStock', (request, response) => {
+    db.collection('boughtStocks').updateOne({sticker: request.body.itemFromJS},{
+        $set: {
+            completed: true
+          }
+    },{
+        sort: {_id: -1},
+        upsert: false
+    })
+    .then(result => {
+        response.json('Marked Complete');
+    })
+    .catch(error => console.error(error));
+});
+
+app.delete('/deleteboughtStock', (request, response) => {
+    db.collection('boughtStocks').deleteOne({sticker: request.body.sticker, price: request.body.price})
+    .then(result => {
+        response.json('Todo Deleted');
+    })
+    .catch(error => console.error(error));
+});
+
 app.get('/stock/:stockName', (req, res) => {
     const stockName = req.params.stockName.toLowerCase()
     if(stockName !== ""){

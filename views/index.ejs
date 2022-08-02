@@ -23,6 +23,25 @@
 				<h2 id="price"></h2>
 				<h2 id="exchange"></h2>
 			</section>
+
+			<section id="boughtStocksSection">
+				<ul class="todoItems">
+					<% for(let i=0; i < boughtStocks.length; i++) {%>
+						<li class="item">
+							<span><%= boughtStocks[i].sticker %></span>
+							<span><%= boughtStocks[i].price %></span>
+							<span class='fa fa-trash'></span>
+						</li>
+					<% } %>
+				</ul>
+
+				<h2>Add a stock you bought:</h2>
+				<form action="/addboughtStock" method="POST">
+					<input type="text" placeholder="AAPL" name="sticker">
+					<input type="text" placeholder="19.99" name="price">
+					<input type="submit">
+				</form>
+			</section>
 			
 		</main>
 	</body>
