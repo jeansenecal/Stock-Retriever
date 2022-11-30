@@ -56,61 +56,59 @@
                         <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
                     </label>
                     <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4">
-                      <li><a class="w-full">Account Settings</a></li> 
-                      <li><a class="w-full">Sign Out</a></li>
+                      <li><a class="w-full">Item 1</a></li> 
+                      <li><a class="w-full">Item 2</a></li>
                     </ul>
                 </div>
               </ul>
     </nav>
-    <section class="p-20 bg-secondary-content h-screen">
-        <div class="overflow-x-auto w-full">
-            <table class="table w-full table-zebra">
-              <!-- head -->
-              <thead>
-                <tr>
-                  <th>Stock Name</th>
-                  <th>Company Name</th>
-                  <th>Price</th>
-                  <th>Hype</th>
-                  <th>Profitability %</th>
-                  <th>Price Increase %</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- row 1 -->
-                <tr>
-                    <td>
-                        <button class="btn btn-ghost btn-xs">AAPL</button>
-                    </td>
-                    <td>Apple</td>
-                    <td>123.4 $</td>
-                    <td>65</td>
-                    <td>95%</td>
-                    <td>5%</td>
-                  <td>
-                    <div class="tooltip" data-tip="Add to bought stocks">
-                        <i class="fa-solid fa-plus text-success"></i>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button class="btn btn-ghost btn-xs">AAPL</button>
-                    </td>
-                    <td>Apple</td>
-                    <td>123.4 $</td>
-                    <td>65</td>
-                    <td>95%</td>
-                    <td>5%</td>
-                  <td>
-                    <div class="tooltip" data-tip="Add to bought stocks">
-                        <i class="fa-solid fa-plus text-success"></i>
-                    </div>
-                  </td>
-                </tr>
-            </table>
-          </div>
-    </section>
+    <div class="flex justify-center">
+        <section class="flex flex-col w-1/4">
+            <div class="form-control">
+                <label class="label cursor-pointer">
+                  <span class="label-text pr-10">Receive Email notifications</span> 
+                  <input type="checkbox" checked="checked" class="checkbox" />
+                </label>
+            </div>
+            <div class="form-control">
+                <label class="label cursor-pointer">
+                    <span class="label-text pr-10">How often?</span>
+                    <select class="select select-bordered">
+                        <option disabled selected>Pick one</option>
+                        <option>Star Wars</option>
+                        <option>Harry Potter</option>
+                        <option>Lord of the Rings</option>
+                        <option>Planet of the Apes</option>
+                        <option>Star Trek</option>
+                    </select>
+                </label>
+            </div>
+            <div class="form-control">
+                <label class="label cursor-pointer">
+                  <span class="label-text">Profitability limit</span> 
+                  <input type="text" placeholder="%" class="input input-bordered input-primary max-w-xs"/>
+                </label>
+            </div>
+            <div class="form-control pt-20">
+                <label class="label cursor-pointer">
+                  <span class="label-text">Change email address</span> 
+                  <input type="text" placeholder="example@domain.com" class="input input-bordered input-primary max-w-xs"/>
+                </label>
+                <button class="btn w-1/2 self-end">Submit</button>
+            </div>
+            <div class="form-control pt-20">
+                <label class="label cursor-pointer">
+                  <span class="label-text">Change password</span> 
+                  <input type="password" placeholder="password" class="input input-bordered input-primary max-w-xs"/>
+                </label>
+                <label class="label cursor-pointer">
+                    <span class="label-text">Retype password</span> 
+                    <input type="password" placeholder="password" class="input input-bordered input-primary max-w-xs"/>
+                  </label>
+                <button class="btn w-1/2 self-end">Submit</button>
+            </div>
+            <button class="btn mt-20 btn-warning">Delete account</button>
+        </section>
+    </div>
 </body>
 </html>
