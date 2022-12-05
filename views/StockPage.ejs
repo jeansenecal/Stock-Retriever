@@ -1,0 +1,41 @@
+<%- include('partials/head') -%>
+<body>
+    
+  <%- include('partials/nav') -%>
+  <div class="h-screen">
+    <section class="flex justify-center">
+      <div class="grid grid-cols-2 gap-x-14 gap-y-8">
+        <label class="input-group grow-0">
+          <span>Stock Ticker:</span>
+          <input type="text" class="input input-bordered" />
+        </label>
+        <label class="input-group">
+          <span>Company Name: </span>
+          <input type="text" class="input input-bordered" />
+        </label>
+        <label class="input-group">
+          <span>Stock Price: </span>
+          <input type="text" class="input input-bordered" />
+        </label>
+        <label class="input-group">
+          <span>Time till max price:</span>
+          <input type="text" class="input input-bordered" />
+        </label>
+        <label class="input-group">
+          <span>Profitability %: </span>
+          <input type="text" class="input input-bordered" />
+        </label>
+      </div>
+    </section>
+    <section class="flex justify-center pt-20">
+      <button class="btn btn-circle mr-5">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+      </button>
+      <button class="btn btn-circle ml-5">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M24 4.685l-16.327 17.315-7.673-9.054.761-.648 6.95 8.203 15.561-16.501.728.685z" /></svg>
+      </button>
+    </section>
+  </div>
+  <%- include('partials/footer') -%>      
+</body>
+</html>

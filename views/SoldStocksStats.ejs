@@ -1,0 +1,53 @@
+<%- include('partials/head') -%>
+<body>
+    
+  <%- include('partials/nav') -%>
+    <section class="p-20 bg-secondary-content h-screen">
+        <div class="overflow-x-auto w-full">
+            <table class="table w-full table-zebra">
+              <!-- head -->
+              <thead>
+                <tr>
+                  <th>Stock Name</th>
+                  <th>Return %</th>
+                  <th>Hype</th>
+                  <th>Sold Price</th>
+                  <th>Bought Price</th>
+                  <th>Date Bought</th>
+                  <th>Return $</th>
+                  <th>Date Sold</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- row 1 -->
+                <tr>
+                    <td>
+                        <button class="btn btn-ghost btn-xs">AAPL</button>
+                    </td>
+                    <td>7%</td>
+                    <td>12</td>
+                    <td>65$</td>
+                    <td>95$</td>
+                    <td>05/11/2022</td>
+                    <td>20$</td>
+                    <td>09/11/2022</td>
+                </tr>
+                <!-- row 2 -->
+                <tr>
+                    <td>
+                        <button class="btn btn-ghost btn-xs">AAPL</button>
+                    </td>
+                    <td>7%</td>
+                    <td>12</td>
+                    <td>65$</td>
+                    <td>95$</td>
+                    <td>05/11/2022</td>
+                    <td>20$</td>
+                    <td>09/11/2022</td>
+                </tr>
+            </table>
+          </div>
+    </section>
+  <%- include('partials/footer') -%>
+</body>
+</html>

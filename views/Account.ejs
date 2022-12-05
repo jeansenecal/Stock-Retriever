@@ -1,0 +1,55 @@
+<%- include('partials/head') -%>
+<body>
+  
+  <%- include('partials/nav') -%>
+  <div class="flex justify-center mb-10">
+      <section class="flex flex-col w-1/4">
+          <div class="form-control">
+              <label class="label cursor-pointer">
+                <span class="label-text pr-10">Receive Email notifications</span> 
+                <input type="checkbox" checked="checked" class="checkbox" />
+              </label>
+          </div>
+          <div class="form-control">
+              <label class="label cursor-pointer">
+                  <span class="label-text pr-10">How often?</span>
+                  <select class="select select-bordered">
+                      <option disabled selected>Pick one</option>
+                      <option>Star Wars</option>
+                      <option>Harry Potter</option>
+                      <option>Lord of the Rings</option>
+                      <option>Planet of the Apes</option>
+                      <option>Star Trek</option>
+                  </select>
+              </label>
+          </div>
+          <div class="form-control">
+              <label class="label cursor-pointer">
+                <span class="label-text">Profitability limit</span> 
+                <input type="text" placeholder="%" class="input input-bordered input-primary max-w-xs"/>
+              </label>
+          </div>
+          <div class="form-control pt-20">
+              <label class="label cursor-pointer">
+                <span class="label-text">Change email address</span> 
+                <input type="text" placeholder="example@domain.com" class="input input-bordered input-primary max-w-xs"/>
+              </label>
+              <button class="btn w-1/2 self-end">Submit</button>
+          </div>
+          <div class="form-control pt-20">
+              <label class="label cursor-pointer">
+                <span class="label-text">Change password</span> 
+                <input type="password" placeholder="password" class="input input-bordered input-primary max-w-xs"/>
+              </label>
+              <label class="label cursor-pointer">
+                  <span class="label-text">Retype password</span> 
+                  <input type="password" placeholder="password" class="input input-bordered input-primary max-w-xs"/>
+                </label>
+              <button class="btn w-1/2 self-end">Submit</button>
+          </div>
+          <button class="btn mt-20 btn-warning">Delete account</button>
+      </section>
+  </div>
+  <%- include('partials/footer') -%>
+</body>
+</html>

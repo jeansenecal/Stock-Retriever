@@ -1,0 +1,57 @@
+<%- include('partials/head') -%>
+<body>
+    
+  <%- include('partials/nav') -%>
+    <section class="p-20 bg-secondary-content h-screen">
+        <div class="overflow-x-auto w-full">
+            <table class="table w-full table-zebra">
+              <!-- head -->
+              <thead>
+                <tr>
+                  <th>Stock Name</th>
+                  <th>Company Name</th>
+                  <th>Price</th>
+                  <th>Hype</th>
+                  <th>Profitability %</th>
+                  <th>Price Increase %</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- row 1 -->
+                <tr>
+                    <td>
+                        <a class="btn btn-ghost btn-xs" href="/StockName">AAPL</button>
+                    </td>
+                    <td>Apple</td>
+                    <td>123.4 $</td>
+                    <td>65</td>
+                    <td>95%</td>
+                    <td>5%</td>
+                  <td>
+                    <div class="tooltip" data-tip="Add to bought stocks">
+                        <i class="fa-solid fa-plus text-success"></i>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a class="btn btn-ghost btn-xs">AAPL</button>
+                    </td>
+                    <td>Apple</td>
+                    <td>123.4 $</td>
+                    <td>65</td>
+                    <td>95%</td>
+                    <td>5%</td>
+                  <td>
+                    <div class="tooltip" data-tip="Add to bought stocks">
+                        <i class="fa-solid fa-plus text-success"></i>
+                    </div>
+                  </td>
+                </tr>
+            </table>
+          </div>
+    </section>
+    <%- include('partials/footer') -%>
+</body>
+</html>
