@@ -24,6 +24,11 @@
                   <button type="submit" class="btn btn-primary">Login</button>
                   <a class="btn btn-secondary" href="/login">Create Account</a>
                 </div>
+                <% if (locals.messages.errors) { %>
+                  <% messages.errors.forEach( el => { %>
+                      <div class="alert alert-danger"><%= el.msg %></div>
+                  <% }) %>    
+                <% } %>
               </form>
             </div>
           </div>
