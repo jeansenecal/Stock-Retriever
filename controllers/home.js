@@ -1,3 +1,5 @@
+const { EmailFrquencyOptions } = require('../models/User');
+
 module.exports = {
     getIndex: (req, res) => {
       res.render("Home.ejs", {title: "Stock Tracker"});
@@ -6,7 +8,8 @@ module.exports = {
       res.render("HighlightedStockListPage.ejs", {title: "Stock Tracker"});
     },
     getAccount: (req, res) => {
-      res.render("Account.ejs", {title: "Account Settings"});
+      console.log(EmailFrquencyOptions)
+      res.render("Account.ejs", {title: "Account Settings", frequencyOptions: EmailFrquencyOptions});
     },
     getBoughtStocks: (req, res) => {
       res.render("BoughtStockPage.ejs", {title: "Bought Stocks"});

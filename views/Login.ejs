@@ -15,14 +15,14 @@
                   <label class="label">
                     <span class="label-text">Password</span>
                   </label>
-                  <input type="text" placeholder="password" class="input input-bordered" name="password"/>
+                  <input type="password" placeholder="password" class="input input-bordered" name="password"/>
                   <label class="label">
                     <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
                   </label>
                 </div>
                 <div class="form-control mt-6 gap-6">
                   <button type="submit" class="btn btn-primary">Login</button>
-                  <a class="btn btn-secondary" href="/login">Create Account</a>
+                  <a class="btn btn-secondary" href="/signup">Create Account</a>
                 </div>
                 <% if (locals.messages.errors) { %>
                   <% messages.errors.forEach( el => { %>

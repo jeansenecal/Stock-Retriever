@@ -14,12 +14,9 @@
               <label class="label cursor-pointer">
                   <span class="label-text pr-10">How often?</span>
                   <select class="select select-bordered">
-                      <option disabled selected>Pick one</option>
-                      <option>Star Wars</option>
-                      <option>Harry Potter</option>
-                      <option>Lord of the Rings</option>
-                      <option>Planet of the Apes</option>
-                      <option>Star Trek</option>
+                    <% for (var prop in frequencyOptions ) { %>
+                      <option><%- frequencyOptions[prop] %></option>
+                    <% } %>
                   </select>
               </label>
           </div>
@@ -28,6 +25,7 @@
                 <span class="label-text">Profitability limit</span> 
                 <input type="text" placeholder="%" class="input input-bordered input-primary max-w-xs"/>
               </label>
+              <button class="btn w-1/2 self-end">Submit</button>
           </div>
           <div class="form-control pt-20">
               <label class="label cursor-pointer">

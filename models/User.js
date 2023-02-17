@@ -1,10 +1,25 @@
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 
+const EmailFrquencyOptions = Object.freeze({
+  Daily: 'Daily',
+  Weekly: 'Weekly',
+  BiWeekly: 'Bi-Weekly',
+  Monthly: 'Monthly'
+})
+
 const UserSchema = new mongoose.Schema({
   email: { type: String, unique: true },
+  isReceivingEmails: { type: Boolean},
+  emailFrequncy : {
+    type: String,
+    enum: Object.values(EmailFrquencyOptions)
+  },
   password: String,
   name: String,
+});
+Object.assign(UserSchema.statics, {
+  EmailFrquencyOptions,
 });
 
 // Password hash middleware.

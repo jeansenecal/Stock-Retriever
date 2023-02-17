@@ -5,18 +5,18 @@ const BoughtStockSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    score: {
-        type: Number,
-        required: true
-    },
-    price: {
-        type: Number,
-        required: true
-    },
-    date: {
+    dateBought: {
         type: Date,
         required: true
-    }
+    },
+    boughtPrice: {
+        type: Number,
+        required: true
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+    },
 });
 
-module.exports = mongoose.model('stockScoreGreater10', BoughtStockSchema);
+module.exports = mongoose.model('boughtstock', BoughtStockSchema);

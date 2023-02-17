@@ -5,15 +5,15 @@ const authController = require('../controllers/auth');
 const {ensureAuth, ensureGuest} = require("../middleware/auth");
 
 router.get('/', homeController.getIndex);
-router.get('/home', homeController.getHome);
+router.get('/home', ensureAuth, homeController.getHome);
 router.get('/BoughtStocks', ensureAuth, homeController.getBoughtStocks);
-router.get('/SoldStocks', homeController.getSoldStocks);
-router.get('/StockName', homeController.getSingleStock);
-router.get('/account', homeController.getAccount);
-router.get('/login', authController.getLogin);
+router.get('/SoldStocks', ensureAuth, homeController.getSoldStocks);
+router.get('/StockName', ensureAuth, homeController.getSingleStock);
+router.get('/account', ensureAuth, homeController.getAccount);
+router.get('/login', ensureGuest, authController.getLogin);
 router.post('/login', authController.postLogin);
-router.get('/signup', authController.getSignup);
+router.get('/signup', ensureGuest, authController.getSignup);
 router.post('/signup', authController.postSignup);
-router.get('/logout', authController.logout);
+router.get('/logout', ensureAuth, authController.logout);
 
 module.exports = router;
