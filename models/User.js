@@ -15,6 +15,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     enum: Object.values(EmailFrquencyOptions)
   },
+  emailProfitabilityLimit: {type: Number},
   password: String,
   name: String,
 });

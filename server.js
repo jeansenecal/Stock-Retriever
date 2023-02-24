@@ -8,7 +8,9 @@ const MongoStore = require("connect-mongo");
 const flash = require("express-flash");
 const methodOverride = require("method-override");
 const mainRoutes = require("./routes/main");
+const userRoutes = require("./routes/user");
 const connectDB = require("./config/database");
+const user = require('./controllers/user');
 
 
 //Use .env file in config folder
@@ -54,6 +56,7 @@ app.use(flash());
 
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
+app.use("/user", userRoutes);
 
 app.listen(process.env.PORT , () => {
     console.log("Server is running, you better catch it!");

@@ -8,7 +8,6 @@ module.exports = {
       res.render("HighlightedStockListPage.ejs", {title: "Stock Tracker"});
     },
     getAccount: (req, res) => {
-      console.log(EmailFrquencyOptions)
       res.render("Account.ejs", {title: "Account Settings", frequencyOptions: EmailFrquencyOptions});
     },
     getBoughtStocks: (req, res) => {
