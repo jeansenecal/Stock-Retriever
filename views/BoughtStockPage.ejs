@@ -10,6 +10,7 @@
                 <tr>
                   <th>Stock Name</th>
                   <th>Return %</th>
+                  <th>Hype</th>
                   <th>Price</th>
                   <th>Bought Price</th>
                   <th>Date Bought</th>
@@ -18,34 +19,17 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- row 1 -->
-                <tr>
-                    <td>
-                        <button class="btn btn-ghost btn-xs">AAPL</button>
-                    </td>
-                    <td>Apple</td>
-                    <td>123.4 $</td>
-                    <td>65</td>
-                    <td>95%</td>
-                    <td>5%</td>
-                  <td>
-                    <div class="tooltip" data-tip="Mark Sold">
-                        <i class="fa-solid fa-usd text-success"></i>
-                    </div>
-                    <div class="tooltip ml-5" data-tip="Remove">
-                      <i class="fa-solid fa-minus text-error"></i>
-                  </div>
-                  </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button class="btn btn-ghost btn-xs">AAPL</button>
-                    </td>
-                    <td>Apple</td>
-                    <td>123.4 $</td>
-                    <td>65</td>
-                    <td>95%</td>
-                    <td>5%</td>
+                <% for(var i=0; i<boughtStocks.length; i++) { %>
+                  <tr>
+                      <td>
+                          <button class="btn btn-ghost btn-xs"><%- boughtStocks[i].symbol %></button>
+                      </td>
+                      <td>Apple</td>
+                      <td>123.4 $</td>
+                      <td><%- boughtStocks[i].hype %></td>
+                      <td><%- boughtStocks[i].boughtPrice %></td>
+                      <td><%- boughtStocks[i].dateBought %></td>
+                      <td>5%</td>
                     <td>
                       <div class="tooltip" data-tip="Mark Sold">
                           <i class="fa-solid fa-usd text-success"></i>
@@ -54,7 +38,8 @@
                         <i class="fa-solid fa-minus text-error"></i>
                     </div>
                     </td>
-                </tr>
+                  </tr>
+                <% } %>
             </table>
           </div>
     </section>
