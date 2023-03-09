@@ -8,13 +8,13 @@
               <!-- head -->
               <thead>
                 <tr>
-                  <th>Stock Name</th>
-                  <th>Return %</th>
+                  <th>Stock Symbol</th>
                   <th>Hype</th>
-                  <th>Price</th>
-                  <th>Bought Price</th>
                   <th>Date Bought</th>
+                  <th>Bought Price</th>
+                  <th>Price</th>
                   <th>Return $</th>
+                  <th>Return %</th>
                   <th></th>
                 </tr>
               </thead>
@@ -24,12 +24,12 @@
                       <td>
                           <button class="btn btn-ghost btn-xs"><%- boughtStocks[i].symbol %></button>
                       </td>
-                      <td>Apple</td>
-                      <td>123.4 $</td>
                       <td><%- boughtStocks[i].hype %></td>
-                      <td><%- boughtStocks[i].boughtPrice %></td>
                       <td><%- boughtStocks[i].dateBought %></td>
-                      <td>5%</td>
+                      <td><%- boughtStocks[i].boughtPrice %> $</td>
+                      <td><%- boughtStocks[i].currentPrice %> $</td>
+                      <td><%- boughtStocks[i].returnDollars %> $</td>
+                      <td><%- boughtStocks[i].returnPercentage %>%</td>
                     <td>
                       <div class="tooltip" data-tip="Mark Sold">
                           <i class="fa-solid fa-usd text-success"></i>

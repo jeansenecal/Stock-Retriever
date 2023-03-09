@@ -19,7 +19,7 @@ exports.postSignup = (req, res, next) => {
   if(!validator.isEmail(req.body.email)){
     validationErrors.push({msg: "Please enter a valid email address."});
   }
-  console.log(req.body.password)
+
   if(!validator.isStrongPassword(req.body.password, {minLength: 8, minUppercase: 1, minNumbers: 1, minSymbols: 0})){
     console.log('jer')
     validationErrors.push({msg: "Please enter a password with at least 8 characters, one uppercase, one number"});
