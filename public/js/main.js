@@ -1,37 +1,46 @@
-const deleteBtn = document.querySelectorAll('.fa-trash');
-document.querySelector('#retrieveBtn').addEventListener('click', retrieveStock);
+const markStockSoldBtn = document.querySelectorAll('#markStockSoldBtn');
+Array.from(markStockSoldBtn).forEach((element)=>{
+    element.addEventListener('click', markStockAsSold);
+});
 
-Array.from(deleteBtn).forEach((element)=>{
-    element.addEventListener('click', deleteItem);
+const removeStockBtn = document.querySelectorAll('#removeStockBtn');
+Array.from(removeStockBtn).forEach((element)=>{
+    element.addEventListener('click', markStockAsSold);
 })
 
-async function retrieveStock(){
-	const stock = document.querySelector("#stockName").value;  
-	const res = await fetch('/stock/' + stock);
-	const data = await res.json();
-	if( !data.err){
-		document.querySelector("#name").textContent = "Name: " + data.name;
-  		document.querySelector("#price").textContent = "Price: " + data.price + " USD";
-  		document.querySelector("#exchange").textContent = "Exchange: " + data.exchange;
-	}else{
-		document.querySelector("#name").textContent = "Error: " + data.err;
-	}
-	
+async function markStockAsSold(){
+    const parentRow = this.parentNode.parentNode.parentNode;
+    const _id = parentRow.childNodes[3].innerText;
+    let currentPrice = parentRow.childNodes[11].innerText;
+    currentPrice = currentPrice.slice(0, currentPrice.lastIndexOf(' '));
+    try{
+        const response = await fetch('user/markStockAsSold', {
+            method: 'put',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              '_id': _id,
+              'currentPrice': currentPrice
+            })
+          });
+        const data = await response;
+        location.reload();
+    }catch(err){
+        console.log(err);
+    }
 }
 
-async function deleteItem(){
-    const sticker = this.parentNode.childNodes[1].innerText
-	const price = this.parentNode.childNodes[3].innerText
+async function removeStock(){
+    const parentRow = this.parentNode.parentNode.parentNode;
+    const _id = parentRow.childNodes[3].innerText;
     try{
-        const response = await fetch('deleteboughtStock', {
+        const response = await fetch('user/boughtStock', {
             method: 'delete',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-              'sticker': sticker,
-			  'price':price
+              '_id': _id,
             })
           });
-        const data = await response.json();
+        const data = await response;
         location.reload();
     }catch(err){
         console.log(err);

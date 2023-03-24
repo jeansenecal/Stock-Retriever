@@ -8,43 +8,29 @@
               <!-- head -->
               <thead>
                 <tr>
-                  <th>Stock Name</th>
-                  <th>Return %</th>
+                  <th>Stock Symbol</th>
                   <th>Hype</th>
-                  <th>Sold Price</th>
-                  <th>Bought Price</th>
                   <th>Date Bought</th>
-                  <th>Return $</th>
+                  <th>Bought Price</th>
                   <th>Date Sold</th>
+                  <th>Sold Price</th>
+                  <th>Return $</th>
+                  <th>Return %</th>
                 </tr>
               </thead>
               <tbody>
-                <!-- row 1 -->
-                <tr>
-                    <td>
-                        <button class="btn btn-ghost btn-xs">AAPL</button>
-                    </td>
-                    <td>7%</td>
-                    <td>12</td>
-                    <td>65$</td>
-                    <td>95$</td>
-                    <td>05/11/2022</td>
-                    <td>20$</td>
-                    <td>09/11/2022</td>
-                </tr>
-                <!-- row 2 -->
-                <tr>
-                    <td>
-                        <button class="btn btn-ghost btn-xs">AAPL</button>
-                    </td>
-                    <td>7%</td>
-                    <td>12</td>
-                    <td>65$</td>
-                    <td>95$</td>
-                    <td>05/11/2022</td>
-                    <td>20$</td>
-                    <td>09/11/2022</td>
-                </tr>
+                <% for(var i=0; i<soldStocks.length; i++) { %>
+                  <tr>
+                      <td><%- soldStocks[i].symbol %></td>
+                      <td><%- soldStocks[i].hype %></td>
+                      <td><%- soldStocks[i].dateBought.toDateString() %></td>
+                      <td><%- soldStocks[i].boughtPrice %> $</td>
+                      <td><%- soldStocks[i].dateSold.toDateString() %></td>
+                      <td><%- soldStocks[i].soldPrice %> $</td>
+                      <td><%- soldStocks[i].return %> $</td>
+                      <td><%- soldStocks[i].returnPercentage %>%</td>
+                  </tr>
+                <% } %>
             </table>
           </div>
     </section>

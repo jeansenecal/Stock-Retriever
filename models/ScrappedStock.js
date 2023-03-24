@@ -19,7 +19,4 @@ const ScrappedStockSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('stockScoreGreater10', ScrappedStockSchema);
-module.exports = mongoose.model('stockScoreGreater50', ScrappedStockSchema);
-module.exports = mongoose.model('stockScoreGreater200', ScrappedStockSchema);
-module.exports = mongoose.model('stockScoreGreater1000', ScrappedStockSchema);
+module.exports = mongoose.model('scrappedStock', ScrappedStockSchema);

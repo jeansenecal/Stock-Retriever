@@ -24,6 +24,7 @@
                       <td>
                           <button class="btn btn-ghost btn-xs"><%- boughtStocks[i].symbol %></button>
                       </td>
+                      <td style="display: none;"><%- boughtStocks[i]._id %></td>
                       <td><%- boughtStocks[i].hype %></td>
                       <td><%- boughtStocks[i].dateBought %></td>
                       <td><%- boughtStocks[i].boughtPrice %> $</td>
@@ -32,10 +33,10 @@
                       <td><%- boughtStocks[i].returnPercentage %>%</td>
                     <td>
                       <div class="tooltip" data-tip="Mark Sold">
-                          <i class="fa-solid fa-usd text-success"></i>
+                          <i class="fa-solid fa-usd text-success" id="markStockSoldBtn"></i>
                       </div>
                       <div class="tooltip ml-5" data-tip="Remove">
-                        <i class="fa-solid fa-minus text-error"></i>
+                        <i class="fa-solid fa-minus text-error" id="removeStockBtn"></i>
                     </div>
                     </td>
                   </tr>
@@ -45,4 +46,5 @@
     </section>
     <%- include('partials/footer') -%>
 </body>
+<script src="/js/main.js"></script>
 </html>

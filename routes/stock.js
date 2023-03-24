@@ -8,10 +8,6 @@ router.get('/', userController.getStockInfo);
 router.get('/:id', userController.getStockInfo);
 //Add stock to bought list
 router.put('/boughtStock/:id', userController.addBoughtStock);
-//remove stock to bought list
-router.delete('/boughtStock/:id', userController.deleteBoughtStock);
-//mark stock in stock to bought list as sold
-router.put('/markStockAsSold/:id', userController.markStockSold);
 //get list of bought unsold stock
 router.get('/boughtStock/', userController.getBoughtStock);
 //get list of sold stock
