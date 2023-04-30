@@ -4,7 +4,7 @@ const cors = require('cors');
 const mongoose = require("mongoose");
 const passport = require("passport");
 const session = require("express-session");
-const MongoStore = require("connect-mongo").default;
+const MongoStore = require("connect-mongo");
 const flash = require("express-flash");
 const methodOverride = require("method-override");
 const mainRoutes = require("./routes/main");
@@ -15,7 +15,7 @@ const schedule = require('node-schedule');
 const scrapeDayminer = require('./scheduledEvents/scrapeStocks');
 
 //Use .env file in config folder
-require('dotenv').config({ path: "./config/.env" });
+require('dotenv').config({ path: "./etc/secrets/.env" });
 
 // Passport config
 require("./config/passport")(passport);
