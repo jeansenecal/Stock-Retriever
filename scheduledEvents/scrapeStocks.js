@@ -1,8 +1,6 @@
 const axios = require('axios');
 const puppeteer = require('puppeteer');
-const schedule = require('node-schedule');
-
-const job = schedule.scheduleJob('0 30 9,15 ? * MON,TUE,WED,THU,FRI *', scrapeDayminer);
+const ScrappedStock = require('../models/ScrappedStock');
 
 async function scrapeDayminer(){
     //Get hyped reddit stock list
@@ -33,31 +31,23 @@ async function scrapeDayminer(){
     let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
     let year = date_ob.getFullYear();
     let hours = date_ob.getHours();
-    let tod = "";
-    if(hours > 12){
-        tod = "pm";
-    }else{
-        tod = "am";
-    }
-    const dateOfRetrieval = year + "-" + month + "-" + date + " " + tod;
+    const dateOfRetrieval = year + "-" + month + "-" + date;
     
     stockScoreDateArray = stockScoreDateArray.filter( e => e.score > 10)
-        .map( e => new Stock(e.symbol, e.score, 0, dateOfRetrieval));
-    
+        .map( e => {
+            return {symbol: e.symbol, score: e.score, date: dateOfRetrieval, price: 0};
+        });
+    console.log(`Inserting ${stockScoreDateArray.length} lines`);
     const intervalId = setInterval( async () => {
         if(stockScoreDateArray.length > 0){
             let stock = stockScoreDateArray.shift();
             stock.price = await getStockPrice(stock.symbol);
-            if(stock.score > 200){
-                db.collection('stockScoreGreater200').insertOne(stock)
-                    .catch(error => console.error(error));
-            }else if (stock.score > 50){
-                db.collection('stockScoreGreater50').insertOne(stock)
-                    .catch(error => console.error(error));
-            }else{
-                db.collection('stockScoreGreater10').insertOne(stock)
-                    .catch(error => console.error(error));
-            }
+
+            let res = await ScrappedStock.findOneAndUpdate(
+                { symbol: stock.symbol },
+                { $push: { history: { score: stock.score, price: stock.price, date: stock.date }}},
+                { upsert: true}
+            );
         }else{
             clearInterval(intervalId);
             console.log("Finished inserting stocks");
@@ -71,3 +61,4 @@ async function getStockPrice(symbol){
     price = res.data.price;
     return price;
 }
+module.exports = scrapeDayminer;

@@ -5,18 +5,11 @@ const ScrappedStockSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    score: {
-        type: Number,
-        required: true
-    },
-    price: {
-        type: Number,
-        required: true
-    },
-    date: {
-        type: Date,
-        required: true
-    }
+    history:[{
+        score: Number,
+        price: Number,
+        date: Date
+    }]
 });
 
 module.exports = mongoose.model('scrappedStock', ScrappedStockSchema);

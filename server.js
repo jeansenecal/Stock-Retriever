@@ -11,7 +11,8 @@ const mainRoutes = require("./routes/main");
 const userRoutes = require("./routes/user");
 const connectDB = require("./config/database");
 const user = require('./controllers/user');
-
+const schedule = require('node-schedule');
+const scrapeDayminer = require('./scheduledEvents/scrapeStocks');
 
 //Use .env file in config folder
 require('dotenv').config({ path: "./config/.env" });
@@ -50,6 +51,9 @@ app.use(
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
+//Scrape job that occurs everyday  
+const job = schedule.scheduleJob('0 0 10 ? * MON,TUE,WED,THU,FRI *', scrapeDayminer);
 
 //Use flash messages for errors, info, ect...
 app.use(flash());
