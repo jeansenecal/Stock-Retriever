@@ -15,7 +15,7 @@ const schedule = require('node-schedule');
 const testDeployedScheduleEvent = require('./scheduledEvents/scrapeStocks');
 
 //Use .env file in config folder
-require('dotenv').config({ path: "./config/.env" });
+require('dotenv').config({ path: ".env" });
 
 // Passport config
 require("./config/passport")(passport);
