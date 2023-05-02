@@ -12,7 +12,7 @@ const userRoutes = require("./routes/user");
 const connectDB = require("./config/database");
 const user = require('./controllers/user');
 const schedule = require('node-schedule');
-const testDeployedScheduleEvent = require('./scheduledEvents/scrapeStocks');
+const scrapeDayminer = require('./scheduledEvents/scrapeStocks');
 
 //Use .env file in config folder
 require('dotenv').config({ path: ".env" });
@@ -53,7 +53,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Scrape job that occurs everyday  0 0 11 ? * MON,TUE,WED,THU,FRI *
-const job = schedule.scheduleJob('0 */5 * ? * *', testDeployedScheduleEvent);
+const job = schedule.scheduleJob('0 */5 * ? * *', scrapeDayminer);
 
 //Use flash messages for errors, info, ect...
 app.use(flash());
