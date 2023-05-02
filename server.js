@@ -53,7 +53,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Scrape job that occurs everyday  
-const job = schedule.scheduleJob('0 0 10 ? * MON,TUE,WED,THU,FRI *', scrapeDayminer);
+const job = schedule.scheduleJob('0 0 11 ? * MON,TUE,WED,THU,FRI *', scrapeDayminer);
 
 //Use flash messages for errors, info, ect...
 app.use(flash());
