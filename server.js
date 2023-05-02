@@ -12,10 +12,10 @@ const userRoutes = require("./routes/user");
 const connectDB = require("./config/database");
 const user = require('./controllers/user');
 const schedule = require('node-schedule');
-const scrapeDayminer = require('./scheduledEvents/scrapeStocks');
+const testDeployedScheduleEvent = require('./scheduledEvents/scrapeStocks');
 
 //Use .env file in config folder
-require('dotenv').config({ path: ".env" });
+require('dotenv').config({ path: "./config/.env" });
 
 // Passport config
 require("./config/passport")(passport);
