@@ -61,4 +61,8 @@ async function getStockPrice(symbol){
     price = res.data.price;
     return price;
 }
-module.exports = scrapeDayminer;
+
+function testDeployedScheduleEvent(){
+    console.log("it's working")
+}
+module.exports = testDeployedScheduleEvent;
