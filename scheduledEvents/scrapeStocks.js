@@ -71,4 +71,4 @@ function testDeployedScheduleEvent(){
     const dateOfRetrieval = year + "-" + month + "-" + date + 'T' + hours;
     console.log("Time: " + dateOfRetrieval)
 }
-module.exports = scrapeDayminer;
+module.exports = testDeployedScheduleEvent;
