@@ -7,7 +7,7 @@ async function scrapeDayminer(){
     //Get hyped reddit stock list
     console.log("Starting scheduled job");
 
-    //Check if the job ran in the last 12 hours
+    /*Check if the job ran in the last 12 hours
     let lastRunDate = await ScheduledJobHistory.findOne().sort({lastrun: 'desc'});
     let dateNow = new Date();
     let hoursDifferenceBetweenDates = lastRunDate == null ? null : (((dateNow - lastRunDate.lastrun)/ 1000)/60)/60 ;
@@ -67,6 +67,7 @@ async function scrapeDayminer(){
     }else{
         console.log("Not scrapping time yet");
     }
+    */
 }
 async function getStockPrice(symbol){
     const url = 'https://api.twelvedata.com/price?symbol=' + symbol + '&apikey=' + process.env.TWELVE_DATA_API_KEY;
