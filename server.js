@@ -64,5 +64,7 @@ app.use("/user", userRoutes);
 
 app.listen(process.env.PORT , () => {
     console.log("Server is running, you better catch it!");
+    let dateNow = new Date();
+    console.log(dateNow.toISOString());
 });
 
