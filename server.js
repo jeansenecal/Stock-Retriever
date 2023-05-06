@@ -10,7 +10,6 @@ const methodOverride = require("method-override");
 const mainRoutes = require("./routes/main");
 const userRoutes = require("./routes/user");
 const connectDB = require("./config/database");
-const user = require('./controllers/user');
 const schedule = require('node-schedule');
 const scrapeDayminer = require('./scheduledEvents/scrapeStocks');
 
@@ -53,7 +52,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Scrape job that occurs everyday
-const job = schedule.scheduleJob('32/1 00 * * 1,2,3,4,5', scrapeDayminer);
+//const job = schedule.scheduleJob('/10 10 * * 1,2,3,4,5', scrapeDayminer);
 
 //Use flash messages for errors, info, ect...
 app.use(flash());
@@ -65,6 +64,5 @@ app.use("/user", userRoutes);
 app.listen(process.env.PORT , () => {
     console.log("Server is running, you better catch it!");
     let dateNow = new Date();
-    console.log(dateNow.toISOString());
 });
 
