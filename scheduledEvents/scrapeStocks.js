@@ -11,8 +11,7 @@ async function scrapeDayminer(){
     let lastRunDate = await ScheduledJobHistory.findOne().sort({lastrun: 'desc'});
     let dateNow = new Date();
     let hoursDifferenceBetweenDates = lastRunDate == null ? null : (((dateNow - lastRunDate.lastrun)/ 1000)/60)/60 ;
-    
-    if(hoursDifferenceBetweenDates == null || hoursDifferenceBetweenDates < 12){
+    if(hoursDifferenceBetweenDates == null || hoursDifferenceBetweenDates > 12){
         console.log("Starting scraping process");
         const browser = await puppeteer.launch({});
         const page = await browser.newPage();
