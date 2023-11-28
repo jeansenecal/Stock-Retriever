@@ -15,6 +15,7 @@ const scrapeDayminer = require('./scheduledEvents/scrapeStocks');
 
 //Use .env file in config folder
 require('dotenv').config({ path: "./config/.env" });
+require('dotenv').config({ path: "./config/.env" });
 
 // Passport config
 require("./config/passport")(passport);
@@ -52,7 +53,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Scrape job that occurs everyday
-const job = schedule.scheduleJob('*/10 17 * * 1,2,3,4,5', scrapeDayminer);
+const job = schedule.scheduleJob('/10 16 * * 1,2,3,4,5', scrapeDayminer);
 
 //Use flash messages for errors, info, ect...
 app.use(flash());

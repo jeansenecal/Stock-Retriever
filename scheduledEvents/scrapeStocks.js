@@ -11,13 +11,14 @@ async function scrapeDayminer(){
     let lastRunDate = await ScheduledJobHistory.findOne().sort({lastrun: 'desc'});
     let dateNow = new Date();
     let hoursDifferenceBetweenDates = lastRunDate == null ? null : (((dateNow - lastRunDate.lastrun)/ 1000)/60)/60 ;
+
     if(hoursDifferenceBetweenDates == null || hoursDifferenceBetweenDates > 12){
         console.log("Starting scraping process");
         const browser = await puppeteer.launch({});
         const page = await browser.newPage();
         await page.goto('https://dayminer.herokuapp.com/');
         const grid = await page.waitForSelector("#dynamic");
-    
+
         var stockScoreDateArray = await page.evaluate(element => {
             let child = element.childNodes;
             let arr = [];
@@ -25,7 +26,7 @@ async function scrapeDayminer(){
                 if(e.classList.contains('symbol-col')){
                     const symbol = e.textContent
                     const score = child[i+1].textContent;
-                    
+
                     arr.push({symbol: symbol, score: score});
                 }
             });
@@ -34,13 +35,13 @@ async function scrapeDayminer(){
         browser.close();
 
         //Get stock price
-        
+
         let date = ("0" + dateNow.getDate()).slice(-2);
         let month = ("0" + (dateNow.getMonth() + 1)).slice(-2);
         let year = dateNow.getFullYear();
         //let hours = date_ob.getHours();
         const dateOfRetrieval = year + "-" + month + "-" + date;
-        
+
         stockScoreDateArray = stockScoreDateArray.filter( e => e.score > 10)
             .map( e => {
                 return {symbol: e.symbol, score: e.score, date: dateOfRetrieval, price: 0};
@@ -69,9 +70,4 @@ async function scrapeDayminer(){
 }
 async function getStockPrice(symbol){
     const url = 'https://api.twelvedata.com/price?symbol=' + symbol + '&apikey=' + process.env.TWELVE_DATA_API_KEY;
-    let res = await axios.get(url);
-    price = res.data.price;
-    return price;
 }
-
-module.exports = scrapeDayminer;
