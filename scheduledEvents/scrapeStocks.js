@@ -59,9 +59,9 @@ async function scrapeDayminer(){
                 );
             }else{
                 clearInterval(intervalId);
-                console.log("Finished inserting stocks");
             }
         },10000, stockScoreDateArray);
+        console.log("Finished inserting stocks");
         const runDate = new ScheduledJobHistory({lastrun: dateNow});
         runDate.save();
     }else{
@@ -71,3 +71,4 @@ async function scrapeDayminer(){
 async function getStockPrice(symbol){
     const url = 'https://api.twelvedata.com/price?symbol=' + symbol + '&apikey=' + process.env.TWELVE_DATA_API_KEY;
 }
+module.exports = scrapeDayminer;
