@@ -41,7 +41,7 @@ async function scrapeDayminer(){
         let year = dateNow.getFullYear();
         //let hours = date_ob.getHours();
         const dateOfRetrieval = year + "-" + month + "-" + date;
-
+        console.log(dateOfRetrieval);
         stockScoreDateArray = stockScoreDateArray.filter( e => e.score > 10)
             .map( e => {
                 return {symbol: e.symbol, score: e.score, date: dateOfRetrieval, price: 0};
